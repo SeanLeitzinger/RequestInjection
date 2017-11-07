@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
-using SimpleInjector;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,9 +8,9 @@ namespace RequestInjectionTest
 {
     public class QueryModelBinderProvider : IModelBinderProvider
     {
-        Container container;
+        IServiceProvider container;
 
-        public QueryModelBinderProvider(Container container)
+        public QueryModelBinderProvider(IServiceProvider container)
         {
             this.container = container;
         }
@@ -26,16 +26,16 @@ namespace RequestInjectionTest
 
     public class QueryModelBinder : IModelBinder
     {
-        Container container;
+        IServiceProvider container;
 
-        public QueryModelBinder(Container container)
+        public QueryModelBinder(IServiceProvider container)
         {
             this.container = container;
         }
 
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
-            var modelInstance = container.GetInstance(bindingContext.ModelType);
+            var modelInstance = container.GetService(bindingContext.ModelType);
             var nameValuePairs = bindingContext.ActionContext.HttpContext.Request.Query.ToDictionary(m => m.Key, m => m.Value.FirstOrDefault());
 
             var json = JsonConvert.SerializeObject(nameValuePairs);

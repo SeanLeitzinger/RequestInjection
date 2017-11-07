@@ -5,19 +5,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RequestInjectionTest.Injectables;
 using RequestInjectionTest.Requests;
-using SimpleInjector;
-using SimpleInjector.Lifestyles;
+using System.Linq;
 using System.Reflection;
 
 namespace RequestInjectionTest
 {
     public class Startup
     {
-        Container container;
-
         public Startup(IConfiguration configuration)
         {
-            container = new Container();
             Configuration = configuration;
         }
 
@@ -26,29 +22,33 @@ namespace RequestInjectionTest
         public void ConfigureServices(IServiceCollection services)
         {
             var requestAssembly = typeof(IRequest).GetTypeInfo().Assembly;
-            container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.EnableSimpleInjectorCrossWiring(container);
-            services.UseSimpleInjectorAspNetRequestScoping(container);
+            services.AddScoped<IContextExample, ContextExample>();
+            services.AddScoped<IExampleRepository, ExampleRepository>();
+            services.AddScoped<IServiceExample, ServiceExample>();
+            services.AddScoped<IExtraInjectable1, ExtraInjectable1>();
+            services.AddScoped<IExtraInjectable2, ExtraInjectable2>();
+            services.AddScoped<IExtraInjectable3, ExtraInjectable3>();
+            services.AddScoped<IExtraInjectable4, ExtraInjectable4>();
 
-            container.Register<IContextExample, ContextExample>();
-            container.Register<IExampleRepository, ExampleRepository>();
-            container.Register<IServiceExample, ServiceExample>();
-            container.Register<IExtraInjectable1, ExtraInjectable1>();
-            container.Register<IExtraInjectable2, ExtraInjectable2>();
-            container.Register<IExtraInjectable3, ExtraInjectable3>();
-            container.Register<IExtraInjectable4, ExtraInjectable4>();
-            container.RegisterCollection(typeof(IRequest), new[] { requestAssembly });
+            services.Scan(scan => scan
+                            .FromAssembliesOf(typeof(IRequest), typeof(GetTestRequest))
+                            .AddClasses()
+                            .AsSelf()
+                            .WithTransientLifetime());
+
+
+            var provider = services.BuildServiceProvider();
 
             services.AddMvc(config =>
             {
                 config.ModelMetadataDetailsProviders.Add(new CustomMetadataProvider());
-                config.ModelBinderProviders.Insert(0, new QueryModelBinderProvider(container));
+                config.ModelBinderProviders.Insert(0, new QueryModelBinderProvider(provider));
             })
             .AddJsonOptions(options =>
             {
-                options.SerializerSettings.Converters.Add(new RequestHandlerConverter<IRequest>(container));
+                options.SerializerSettings.Converters.Add(new RequestHandlerConverter<IRequest>(provider));
             });
         }
 

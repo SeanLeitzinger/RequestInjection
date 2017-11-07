@@ -12,9 +12,9 @@ namespace ApiClient
     {
         static void Main(string[] args)
         {
-            TestControllerInjection();
-            Console.WriteLine();
             TestMediatr();
+            Console.WriteLine();
+            TestControllerInjection();
             Console.WriteLine();
             TestRequestInjection();
             Console.ReadKey();

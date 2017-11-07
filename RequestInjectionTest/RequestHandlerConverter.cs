@@ -1,22 +1,21 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using SimpleInjector;
 using System;
 
 namespace RequestInjectionTest
 {
     public class RequestHandlerConverter<T> : CustomCreationConverter<T>
     {
-        Container container;
+        IServiceProvider container;
 
-        public RequestHandlerConverter(Container container)
+        public RequestHandlerConverter(IServiceProvider serviceProvider)
         {
-            this.container = container;
+            this.container = serviceProvider;
         }
 
         public override T Create(Type objectType)
         {
-            return (T)container.GetInstance(objectType);
+            return (T)container.GetService(objectType);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
