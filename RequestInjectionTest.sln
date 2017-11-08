@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RequestInjectionTest", "Req
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiClient", "ApiClient\ApiClient.csproj", "{2DF1942B-2077-42CE-B3EC-21B6CF572A21}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControllerInjectionTest", "NoRequestInjectionTest\ControllerInjectionTest.csproj", "{1F3F2D9B-7A77-40E7-B3B7-42775070AA56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControllerInjectionTest", "ControllerInjectionTest\ControllerInjectionTest.csproj", "{1F3F2D9B-7A77-40E7-B3B7-42775070AA56}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatrTest", "MediatrTest\MediatrTest.csproj", "{366DA479-A148-4007-A6CC-3817D562EC1E}"
 EndProject
