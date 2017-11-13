@@ -57,7 +57,7 @@ namespace ApiClient
             Console.WriteLine("Request injection test begin.");
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            Console.WriteLine("Get test");
+            Console.WriteLine("GET test");
 
             for (int i = 0; i < 10000; i++)
             {
@@ -66,7 +66,7 @@ namespace ApiClient
 
             Console.WriteLine(stopwatch.Elapsed);
             stopwatch.Restart();
-            Console.WriteLine("Add test");
+            Console.WriteLine("POST test");
 
             for (int i = 0; i < 10000; i++)
             {
@@ -111,7 +111,7 @@ namespace ApiClient
             Console.WriteLine("Controller injection test begin.");
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            Console.WriteLine("Get test");
+            Console.WriteLine("GET test");
 
             for (int i = 0; i < 10000; i++)
             {
@@ -120,7 +120,7 @@ namespace ApiClient
 
             Console.WriteLine(stopwatch.Elapsed);
             stopwatch.Restart();
-            Console.WriteLine("Add test");
+            Console.WriteLine("POST test");
 
             for (int i = 0; i < 10000; i++)
             {
@@ -168,7 +168,7 @@ namespace ApiClient
             Console.WriteLine("Mediatr injection test begin.");
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            Console.WriteLine("Get test");
+            Console.WriteLine("GET test");
 
             for (int i = 0; i < 10000; i++)
             {
@@ -177,7 +177,7 @@ namespace ApiClient
 
             Console.WriteLine(stopwatch.Elapsed);
             stopwatch.Restart();
-            Console.WriteLine("Add test");
+            Console.WriteLine("POST test");
 
             for (int i = 0; i < 10000; i++)
             {
