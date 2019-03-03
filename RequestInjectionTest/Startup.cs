@@ -45,12 +45,12 @@ namespace RequestInjectionTest
 
             services.AddMvc(config =>
             {
-                config.ModelMetadataDetailsProviders.Add(new RequestInjectionMetadataProvider());
+                config.ModelMetadataDetailsProviders.Add(new RequestInjectorMetadataProvider());
                 config.ModelBinderProviders.Insert(0, new RequestInjectorModelBinderProvider());
             })
             .AddJsonOptions(options =>
             {
-                options.SerializerSettings.Converters.Add(new RequestInjectionHandler<IRequest>(provider));
+                options.SerializerSettings.Converters.Add(new RequestInjectorHandler<IRequest>(provider));
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
         }
