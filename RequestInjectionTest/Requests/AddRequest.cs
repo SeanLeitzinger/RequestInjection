@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RequestInjectionTest.Injectables;
-using RequestInjectionTest.Models;
-using System.Threading.Tasks;
+using RequestInjectionTest.Data;
+using RequestInjectionTest.Data.Injectables;
+using RequestInjectionTest.Data.Models;
+using RequestInjector.NetCore;
 
 namespace RequestInjectionTest.Requests
 {
@@ -9,18 +10,25 @@ namespace RequestInjectionTest.Requests
     {
         public TestModel TestModel { get; set; }
 
-        IContextExample context;
-        IExampleRepository repository;
-        IServiceExample service;
+        private readonly IContextExample context;
+        private readonly IExampleRepository repository;
+        private readonly IServiceExample service;
+        private readonly RequestInjectionTestDbContext dbContext;
 
-        public AddRequest(IContextExample context, IExampleRepository repository, IServiceExample service)
+        public AddRequest()
+        {
+
+        }
+
+        public AddRequest(IContextExample context, IExampleRepository repository, IServiceExample service, RequestInjectionTestDbContext dbContext)
         {
             this.context = context;
             this.repository = repository;
             this.service = service;
+            this.dbContext = dbContext;
         }
 
-        public async Task<IActionResult> Handle()
+        public IActionResult Handle()
         {
             return new OkResult();
         }

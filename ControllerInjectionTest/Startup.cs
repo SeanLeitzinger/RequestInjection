@@ -1,9 +1,10 @@
-﻿using ControllerInjectionTest.Injectables;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RequestInjectionTest.Data;
+using RequestInjectionTest.Data.Injectables;
 
 namespace ControllerInjectionTest
 {
@@ -27,6 +28,7 @@ namespace ControllerInjectionTest
             services.AddTransient<IExtraInjectable2, ExtraInjectable2>();
             services.AddTransient<IExtraInjectable3, ExtraInjectable3>();
             services.AddTransient<IExtraInjectable4, ExtraInjectable4>();
+            services.AddDbContext<RequestInjectionTestDbContext>();
 
             services.AddMvc();
         }

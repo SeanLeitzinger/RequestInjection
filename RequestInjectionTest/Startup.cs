@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RequestInjectionTest.Injectables;
+using RequestInjectionTest.Data;
+using RequestInjectionTest.Data.Injectables;
 using RequestInjectionTest.Requests;
+using RequestInjector.NetCore;
 using System.Linq;
 using System.Reflection;
 
@@ -31,24 +33,25 @@ namespace RequestInjectionTest
             services.AddScoped<IExtraInjectable2, ExtraInjectable2>();
             services.AddScoped<IExtraInjectable3, ExtraInjectable3>();
             services.AddScoped<IExtraInjectable4, ExtraInjectable4>();
+            services.AddDbContext<RequestInjectionTestDbContext>();
 
             services.Scan(scan => scan
                             .FromAssembliesOf(typeof(IRequest), typeof(GetTestRequest))
                             .AddClasses()
                             .AsSelf()
-                            .WithTransientLifetime());
-
+                            .WithScopedLifetime());
 
             var provider = services.BuildServiceProvider();
 
             services.AddMvc(config =>
             {
-                config.ModelMetadataDetailsProviders.Add(new CustomMetadataProvider());
-                config.ModelBinderProviders.Insert(0, new QueryModelBinderProvider(provider));
+                config.ModelMetadataDetailsProviders.Add(new RequestInjectionMetadataProvider());
+                config.ModelBinderProviders.Insert(0, new RequestInjectorModelBinderProvider());
             })
             .AddJsonOptions(options =>
             {
-                options.SerializerSettings.Converters.Add(new RequestHandlerConverter<IRequest>(provider));
+                options.SerializerSettings.Converters.Add(new RequestInjectionHandler<IRequest>(provider));
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
         }
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MediatrTest.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class MediatrController : Controller
     {
         readonly IMediator mediator;
@@ -15,18 +15,10 @@ namespace MediatrTest.Controllers
             this.mediator = mediator;
         }
 
-        [Route("Get")]
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetRequest request)
-        {
-            return await mediator.Send(request);
-        }
+        public async Task<IActionResult> Get([FromQuery] GetRequest request) => await mediator.Send(request);
 
-        [Route("Add")]
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] AddRequest request)
-        {
-            return await mediator.Send(request);
-        }
+        public async Task<IActionResult> Add([FromBody] AddRequest request) => await mediator.Send(request);
     }
 }

@@ -1,25 +1,27 @@
 ﻿using MediatR;
-using MediatrTest.Injectables;
 using MediatrTest.Requests;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using RequestInjectionTest.Data;
+using RequestInjectionTest.Data.Injectables;
 
 namespace MediatrTest.Handler
 {
-    public class GetHandler : IAsyncRequestHandler<GetRequest, IActionResult>
+    public class GetHandler : RequestHandler<GetRequest, IActionResult>
     {
-        IContextExample context;
-        IExampleRepository repository;
-        IServiceExample service;
+        private readonly IContextExample context;
+        private readonly IExampleRepository repository;
+        private readonly IServiceExample service;
+        private readonly RequestInjectionTestDbContext dbContext;
 
-        public GetHandler(IContextExample context, IExampleRepository repository, IServiceExample service)
+        public GetHandler(IContextExample context, IExampleRepository repository, IServiceExample service, RequestInjectionTestDbContext dbContext)
         {
             this.context = context;
             this.repository = repository;
             this.service = service;
+            this.dbContext = dbContext;
         }
 
-        public async Task<IActionResult> Handle(GetRequest message)
+        protected override IActionResult Handle(GetRequest request)
         {
             return new OkObjectResult("C# is love! C# is life!");
         }

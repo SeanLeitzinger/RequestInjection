@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using RequestInjectionTest.Models;
+using RequestInjectionTest.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,9 +8,9 @@ using System.Text;
 
 namespace ApiClient
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             TestMediatr();
             Console.WriteLine();
@@ -20,11 +20,11 @@ namespace ApiClient
             Console.ReadKey();
         }
 
-        static void TestRequestInjection()
+        private static void TestRequestInjection()
         {
             var requestInjectionClient = new HttpClient
             {
-                BaseAddress = new Uri("http://localhost:51231/api/")
+                BaseAddress = new Uri("http://localhost:58298/api/")
             };
             var request = new
             {
@@ -76,11 +76,11 @@ namespace ApiClient
             Console.WriteLine(stopwatch.Elapsed);
         }
 
-        static void TestControllerInjection()
+        private static void TestControllerInjection()
         {
             var controllerInjectionClient = new HttpClient
             {
-                BaseAddress = new Uri("http://localhost:57939/api/")
+                BaseAddress = new Uri("http://localhost:58301/api/")
             };
 
             var testModel = new TestModel
@@ -130,11 +130,11 @@ namespace ApiClient
             Console.WriteLine(stopwatch.Elapsed);
         }
 
-        static void TestMediatr()
+        private static void TestMediatr()
         {
             var mediatrClient = new HttpClient
             {
-                BaseAddress = new Uri("http://localhost:59491/api/")
+                BaseAddress = new Uri("http://localhost:58300/api/")
             };
 
             var request = new

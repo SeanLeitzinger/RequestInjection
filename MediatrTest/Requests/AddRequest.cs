@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using MediatrTest.Models;
 using Microsoft.AspNetCore.Mvc;
+using RequestInjectionTest.Data.Models;
 
 namespace MediatrTest.Requests
 {

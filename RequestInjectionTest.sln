@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiClient", "ApiClient\ApiC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControllerInjectionTest", "ControllerInjectionTest\ControllerInjectionTest.csproj", "{1F3F2D9B-7A77-40E7-B3B7-42775070AA56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatrTest", "MediatrTest\MediatrTest.csproj", "{366DA479-A148-4007-A6CC-3817D562EC1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatrTest", "MediatrTest\MediatrTest.csproj", "{366DA479-A148-4007-A6CC-3817D562EC1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestInjectionTest.Data", "RequestInjectionTest.Data\RequestInjectionTest.Data.csproj", "{5CACAB36-C5DA-4677-B7AF-54EA70E650D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{366DA479-A148-4007-A6CC-3817D562EC1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{366DA479-A148-4007-A6CC-3817D562EC1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{366DA479-A148-4007-A6CC-3817D562EC1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CACAB36-C5DA-4677-B7AF-54EA70E650D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CACAB36-C5DA-4677-B7AF-54EA70E650D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CACAB36-C5DA-4677-B7AF-54EA70E650D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CACAB36-C5DA-4677-B7AF-54EA70E650D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

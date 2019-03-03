@@ -1,17 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace RequestInjectionTest.Requests
 {
+    public interface IRequestHandlerAsync<request, response>
+    {
+        Task<response> HandleAsync();
+    }
+
+    public interface IRequestHandlerAsync<request>
+    {
+        Task HandleAsync();
+    }
+
     public interface IRequestHandler<request, response>
     {
-        Task<response> Handle();
+        response Handle();
     }
 
     public interface IRequestHandler<request>
     {
-        Task Handle();
+        void Handle();
     }
 }
